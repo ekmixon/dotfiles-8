@@ -29,9 +29,7 @@ def virsh_send_key(vm: str, keycodes: T.List[str]) -> None:
 
 
 vm = sys.argv[1]
-mode = None
-if len(sys.argv) > 2:
-    mode = sys.argv[2]
+mode = sys.argv[2] if len(sys.argv) > 2 else None
 assert vm
 
 string = sys.stdin.read()

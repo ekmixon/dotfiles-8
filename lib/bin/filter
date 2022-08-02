@@ -30,8 +30,7 @@ parser.add_argument('command', nargs='+')
 args = parser.parse_args()
 
 command = args.command
-delimiter_is_regex = args.regex
-if delimiter_is_regex:
+if delimiter_is_regex := args.regex:
     delimiter = re.compile(args.delimiter)
 else:
     delimiter = args.delimiter
@@ -57,8 +56,7 @@ def read_split(f: T.IO[str], delimiter: T.Union[str, T.Pattern]) -> T.Iterator[s
         if tail:
             yield buf + head
             buf = tail.pop()
-            for part in tail:
-                yield part
+            yield from tail
         else:
             buf += chunk
     if buf:

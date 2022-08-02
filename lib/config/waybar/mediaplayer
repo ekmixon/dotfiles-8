@@ -16,9 +16,12 @@ logger = logging.getLogger(__name__)
 def write_output(text, player):
     logger.info('Writing output')
 
-    output = {'text': text,
-              'class': 'custom-' + player.props.player_name,
-              'alt': player.props.player_name}
+    output = {
+        'text': text,
+        'class': f'custom-{player.props.player_name}',
+        'alt': player.props.player_name,
+    }
+
 
     sys.stdout.write(json.dumps(output) + '\n')
     sys.stdout.flush()
@@ -102,7 +105,7 @@ def main():
     logger.setLevel(max((3 - arguments.verbose) * 10, 0))
 
     # Log the sent command line arguments
-    logger.debug('Arguments received {}'.format(vars(arguments)))
+    logger.debug(f'Arguments received {vars(arguments)}')
 
     manager = Playerctl.PlayerManager()
     loop = GLib.MainLoop()
